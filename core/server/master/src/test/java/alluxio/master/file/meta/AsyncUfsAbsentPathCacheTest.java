@@ -205,7 +205,10 @@ public class AsyncUfsAbsentPathCacheTest {
         .waitFor("path (" + path + ") to be added to absent cache", new Function<Void, Boolean>() {
           @Override
           public Boolean apply(Void input) {
-            return pool.getCompletedTaskCount() != initialTasks;
+            if (pool.getCompletedTaskCount() == initialTasks) {
+              return false;
+            }
+            return true;
           }
         }, WaitForOptions.defaults().setTimeoutMs(10000));
   }
@@ -219,7 +222,10 @@ public class AsyncUfsAbsentPathCacheTest {
         new Function<Void, Boolean>() {
           @Override
           public Boolean apply(Void input) {
-            return pool.getCompletedTaskCount() != initialTasks;
+            if (pool.getCompletedTaskCount() == initialTasks) {
+              return false;
+            }
+            return true;
           }
         }, WaitForOptions.defaults().setTimeoutMs(10000));
   }

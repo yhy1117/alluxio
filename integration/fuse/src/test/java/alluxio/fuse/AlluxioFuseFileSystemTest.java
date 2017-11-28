@@ -36,7 +36,6 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
 import jnr.ffi.Pointer;
 import jnr.ffi.Runtime;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -73,12 +72,7 @@ public class AlluxioFuseFileSystemTest {
         new AlluxioFuseOptions("/doesnt/matter", TEST_ROOT_PATH, false, empty);
 
     mFileSystem = mock(FileSystem.class);
-    try {
-      mFuseFs = new AlluxioFuseFileSystem(mFileSystem, opts);
-    } catch (UnsatisfiedLinkError e) {
-      // stop test and ignore if FuseFileSystem fails to create due to missing libfuse library
-      Assume.assumeNoException(e);
-    }
+    mFuseFs = new AlluxioFuseFileSystem(mFileSystem, opts);
     mFileInfo = allocateNativeFileInfo();
   }
 

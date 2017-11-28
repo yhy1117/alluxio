@@ -128,7 +128,7 @@ public abstract class RPCMessage implements EncodedMessage {
   public abstract Type getType();
 
   /**
-   * Validates the message. Throws an Exception if the message is invalid.
+   * Validate the message. Throws an Exception if the message is invalid.
    */
   public void validate() {}
 
